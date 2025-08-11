@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Empire - Jeu Incrémental</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Space Empire - Construisez votre empire spatial dans ce jeu incrémental addictif !">
+    <meta name="keywords" content="jeu, incrémental, idle, space, empire, spatial">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Space Empire 🌌</h1>
+            <p>Construisez votre empire spatial et dominez la galaxie !</p>
+            <div class="game-info">
+                <span id="gameVersion">v1.0 - Mode Solo</span>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="panel">
+                <h2>💰 Ressources</h2>
+                <div class="resource">
+                    <span class="resource-name">🪙 Crédits</span>
+                    <span class="resource-value" id="credits">100</span>
+                    <span class="resource-rate" id="creditsRate">+0/sec</span>
+                </div>
+                <div class="resource">
+                    <span class="resource-name">⚡ Énergie</span>
+                    <span class="resource-value" id="energy">0</span>
+                    <span class="resource-rate" id="energyRate">+0/sec</span>
+                </div>
+                <div class="resource">
+                    <span class="resource-name">🔬 Recherche</span>
+                    <span class="resource-value" id="research">0</span>
+                    <span class="resource-rate" id="researchRate">+0/sec</span>
+                </div>
+                <div class="resource">
+                    <span class="resource-name">👥 Population</span>
+                    <span class="resource-value" id="population">10</span>
+                    <span class="resource-rate" id="populationRate">+0/sec</span>
+                </div>
+                <div class="resource total-score">
+                    <span class="resource-name">🏆 Score Total</span>
+                    <span class="resource-value" id="totalScore">100</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>🏗️ Bâtiments</h2>
+                <div id="buildingsContainer"></div>
+            </div>
+
+            <div class="panel prestige-panel">
+                <h2>✨ Prestige</h2>
+                <p>Redémarrez votre empire pour obtenir des bonus permanents !</p>
+                <div class="resource">
+                    <span class="resource-name">💎 Cristaux de Prestige</span>
+                    <span class="resource-value" id="prestigeCrystals">0</span>
+                </div>
+                <div class="resource">
+                    <span class="resource-name">🚀 Multiplicateur Global</span>
+                    <span class="resource-value" id="globalMultiplier">x1.0</span>
+                </div>
+                <p id="prestigeReward">Prochain prestige: +0 cristaux</p>
+                <button class="prestige-button" id="prestigeButton" disabled>
+                    Prestige Requis: 1M de score
+                </button>
+            </div>
+
+            <div class="panel">
+                <h2>🎯 Succès</h2>
+                <div id="achievementsContainer">
+                    <p>Accomplissez des objectifs pour débloquer des succès !</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>📊 Statistiques</h2>
+                <div class="stats-grid">
+                    <div class="stat">
+                        <span class="stat-label">Temps de jeu</span>
+                        <span class="stat-value" id="playTime">0m</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Bâtiments totaux</span>
+                        <span class="stat-value" id="totalBuildings">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Succès débloqués</span>
+                        <span class="stat-value" id="totalAchievements">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Prestiges effectués</span>
+                        <span class="stat-value" id="totalPrestiges">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>⚙️ Options</h2>
+                <div class="options-grid">
+                    <button class="option-button" onclick="game.exportSave()">📥 Exporter Sauvegarde</button>
+                    <button class="option-button" onclick="game.importSave()">📤 Importer Sauvegarde</button>
+                    <button class="option-button danger" onclick="game.resetGame()">🗑️ Reset Complet</button>
+                    <button class="option-button" onclick="game.toggleNotifications()">🔔 Notifications</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Made with ❤️ for Space Empire fans | <a href="https://github.com" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notifications"></div>
+
+    <!-- Modal pour import/export -->
+    <div class="modal" id="saveModal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Sauvegarde</h2>
+            <textarea id="saveData" placeholder="Collez votre sauvegarde ici..."></textarea>
+            <div class="modal-buttons">
+                <button class="option-button" onclick="game.processSaveData()">Confirmer</button>
+                <button class="option-button" onclick="game.closeSaveModal()">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
